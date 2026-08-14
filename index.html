@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Char!</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 24px 16px 64px;
+    background: #fff6fa;
+    color: #2b2b2b;
+    line-height: 1.5;
+  }
+  header {
+    max-width: 640px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 16px;
+    color: #d6336c;
+    letter-spacing: 0.5px;
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin: 0 0 8px;
+  }
+  header p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  .count {
+    margin-top: 16px;
+    font-weight: 600;
+    color: #d6336c;
+  }
+  ol {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    background: #fff;
+    border: 2px solid #ffd6e6;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 20px;
+  }
+  li.done {
+    border-color: #37b24d;
+    background: #f4fff6;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    accent-color: #37b24d;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>HAPPY BIRTHDAY CHAR!</h1>
+  <h2>Bonus Challenge:</h2>
+  <p>Complete as many of the below photographs throughout the day to earn a bonus prize.</p>
+  <p class="count"><span id="done">0</span> / 8 completed</p>
+</header>
+
+<ol id="list">
+  <li><img src="IMG_2075.jpg" alt="Photo 1"><label><input type="checkbox" data-id="1"> Photo 1</label></li>
+  <li><img src="IMG_2076.jpg" alt="Photo 2"><label><input type="checkbox" data-id="2"> Photo 2</label></li>
+  <li><img src="IMG_2082.jpg" alt="Photo 3"><label><input type="checkbox" data-id="3"> Photo 3</label></li>
+  <li><img src="IMG_2083.jpg" alt="Photo 4"><label><input type="checkbox" data-id="4"> Photo 4</label></li>
+  <li><img src="IMG_2084.JPG" alt="Photo 5"><label><input type="checkbox" data-id="5"> Photo 5</label></li>
+  <li><img src="IMG_2085.jpg" alt="Photo 6"><label><input type="checkbox" data-id="6"> Photo 6</label></li>
+  <li><img src="IMG_2086.jpg" alt="Photo 7"><label><input type="checkbox" data-id="7"> Photo 7</label></li>
+  <li><img src="IMG_2087.jpg" alt="Photo 8"><label><input type="checkbox" data-id="8"> Photo 8</label></li>
+</ol>
+
+<script>
+  var boxes = document.querySelectorAll('input[type="checkbox"]');
+  var doneEl = document.getElementById('done');
+
+  function update() {
+    var n = 0;
+    boxes.forEach(function (box) {
+      box.closest('li').classList.toggle('done', box.checked);
+      if (box.checked) n++;
+    });
+    doneEl.textContent = n;
+  }
+
+  boxes.forEach(function (box) {
+    box.checked = localStorage.getItem('photo-' + box.dataset.id) === 'true';
+    box.addEventListener('change', function () {
+      localStorage.setItem('photo-' + box.dataset.id, box.checked);
+      update();
+    });
+  });
+
+  update();
+</script>
+
+</body>
+</html>
